@@ -1,0 +1,14 @@
+#!/bin/bash
+desc="Delete local branches which does not exist on remote"
+subcommand="cleanup"
+# Print description
+echo -e "\n$desc\n"
+function _delete_gone_branches() {
+    # prunes tracking branches not on the remote
+    $(git remote prune origin)
+    # lists gone branches
+    gone=$(git branch -vv | grep ': gone]' | awk '{ print $1; }')
+    # delete gone branches
+    echo "$gone" | xargs git branch -d
+}
+_delete_gone_branches
