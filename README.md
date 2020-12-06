@@ -16,6 +16,7 @@
 <a name="git-cleanup"></a>
 ### **git-cleanup**
 _description:_ Delete local branches which does not exist on remote.
+
 _usage:_  
 ```
 git cleanup
