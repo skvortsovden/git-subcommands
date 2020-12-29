@@ -7,8 +7,21 @@ function _delete_gone_branches() {
     # prunes tracking branches not on the remote
     $(git remote prune origin)
     # lists gone branches
-    gone=$(git branch -vv | grep ': gone]' | awk '{ print $1; }')
-    # delete gone branches
-    echo "$gone" | xargs git branch -d
+    gone_branches_list=$(git branch -vv | grep ': gone]' | awk '{ print $1; }')
+    # loop through list of branches
+    while IFS= read -r branch; do
+        # delete gone branch
+        if $(git branch -d "$branch"); then
+            echo "Deleted $branch."
+        else
+            # force delete branch
+            read -p "Force delete $branch? [y/n]: " REPLY 0</dev/tty
+            echo # (optional) move to a new line
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                git branch -D "$branch"
+                echo # (optional) move to a new line
+            fi
+        fi
+    done < <(printf '%s\n' "$gone_branches_list")
 }
 _delete_gone_branches
