@@ -1,9 +1,9 @@
 # git-subcommands
 
 ## Table of contents
-1. [how to install](#install)
-2. [subcommands](#subcommands)
+- [git-subcommands](#git-subcommands)
     - [git-cleanup](#git-cleanup)
+    - [git-default-branch](#git-default-branch)
 <a name="install"></a>
 ## **1. how to install**
 1. Clone this repository
@@ -20,4 +20,13 @@ _description:_ Delete local branches which does not exist on remote.
 _usage:_  
 ```
 git cleanup
+```
+
+<a name="git-cleanup"></a>
+### **git-default-branch**
+_description:_ Show default branch name.
+
+_usage:_  
+```
+git default-branch
 ```
