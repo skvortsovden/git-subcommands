@@ -1,0 +1,10 @@
+#!/bin/bash
+desc="Show default branch name"
+subcommand="default-branch"
+# Print description
+echo -e "\n$desc\n"
+function _show_default_branch() {
+    default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+    echo "default branch: $default_branch"
+}
+_show_default_branch
